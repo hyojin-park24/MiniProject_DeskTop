@@ -34,7 +34,10 @@ namespace WpfSMSApp.View
                                                       null);
 
             if (result == MessageDialogResult.Affirmative)
+            {
+                Commons.LOGGER.Info("프로그램 종료");
                 Application.Current.Shutdown(); //로그인창을 닫으면 프로그램 완전히 종료
+            }
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

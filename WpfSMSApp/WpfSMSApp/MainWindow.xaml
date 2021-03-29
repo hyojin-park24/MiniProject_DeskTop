@@ -9,7 +9,13 @@
     mc:Ignorable="d"
     Title="Stop Management System" Height="700" Width="1200"
     Icon="stock.png"
-    ContentRendered="MetroWindow_ContentRendered" WindowStartupLocation="CenterScreen">
+    ContentRendered="MetroWindow_ContentRendered" Activated="MetroWindow_Activated"
+    WindowStartupLocation="CenterScreen">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button x:Name="BtnLogindeId"/>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="70">
             <Grid.ColumnDefinitions>
@@ -103,7 +109,7 @@
 
             <Button x:Name="BtnAccount" Grid.Column="6"
                     Content="계정" FontSize="16" Margin="5,5"
-                    Foreground="White" Background="CornflowerBlue">
+                    Foreground="White" Background="CornflowerBlue" Click="BtnAccount_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -116,7 +122,7 @@
 
             <Button x:Name="BtnLogOut" Grid.Column="7"
                     Content="로그아웃" FontSize="16" Margin="5,5"
-                    Foreground="White" Background="Gray">
+                    Foreground="White" Background="Gray" Click="BtnLogOut_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -129,7 +135,7 @@
 
         </Grid>
         <Grid Background="WhiteSmoke">
-            <ContentControl x:Name="ActiveControl"/> <!--화면전환-->
+            <Frame x:Name="ActiveControl"/> <!--화면전환-->
         </Grid> 
     </DockPanel>
 </mah:MetroWindow>
