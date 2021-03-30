@@ -96,7 +96,7 @@
 
             <Button x:Name="BtnUsers" Grid.Column="5"
                     Content="사용자" FontSize="16" Margin="5,5"
-                    Foreground="White" Background="LightSteelBlue">
+                    Foreground="White" Background="LightSteelBlue" Click="BtnUsers_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -135,7 +135,7 @@
 
         </Grid>
         <Grid Background="WhiteSmoke">
-            <Frame x:Name="ActiveControl"/> <!--화면전환-->
+            <Frame x:Name="ActiveControl" NavigationUIVisibility="Hidden"/> <!--화면전환-->
         </Grid> 
     </DockPanel>
 </mah:MetroWindow>
