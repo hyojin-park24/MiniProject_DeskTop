@@ -35,7 +35,7 @@
         </Grid.ColumnDefinitions>
         
         <!--제목 입력-->
-        <Label Grid.Row="0" Grid.Column="1" Content="계정리스트" FontSize="30" FontWeight="ExtraBold"
+        <Label Grid.Row="0" Grid.Column="1" Content="사용자리스트" FontSize="30" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalAlignment="Left"/>
         <!--제목 입력 끝-->
         
@@ -54,7 +54,7 @@
             <Button x:Name="BtnDeactivateUser"
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
-                    Content="사용자 비활성화" Height="50" Margin="5,5" Click="BtnDeactivateUser_Click">
+                    Content="사용자 비활성화" Height="50" Margin="5,5" Click="BtnDeactiveUser_Click">
             </Button>
             <Button x:Name="BtnExportPdf"
                     FontSize="14"
@@ -72,13 +72,25 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <RadioButton Content="모두" Margin="5,0"></RadioButton>
-                <RadioButton Content="활성" Margin="5,0"></RadioButton>
-                <RadioButton Content="비활성" Margin="5,0"></RadioButton>
+                <RadioButton x:Name="RdoAll" Content="모두" Margin="5,0" Checked="RdoAll_Checked"></RadioButton>
+                <RadioButton x:Name="RdoActive" Content="활성" Margin="5,0" Checked="RdoActive_Checked"></RadioButton>
+                <RadioButton x:Name="RdoDeactive" Content="비활성" Margin="5,0" Checked="RdoDeactive_Checked"></RadioButton>
             </StackPanel>
 
-            <DataGrid x:Name="GrdData" Grid.Row="1">
-                
+            <DataGrid x:Name="GrdData" Grid.Row="1"
+                      AutoGenerateColumns="False" SelectionUnit="FullRow"
+                      GridLinesVisibility="Vertical" ItemsSource="{Binding}"
+                      Style="{StaticResource MahApps.Styles.DataGrid.Azure}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UserID}" Header="순번" Width="50" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserIdentityNumber}" Header="사번" Width="1.2*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="성" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="이름" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserEmail}" Header="이메일" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserAdmin}" Header="관리자여부" Width="83" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserActivated}" Header="활성여부" Width="72" IsReadOnly="True"/>
+                </DataGrid.Columns>
+
             </DataGrid>
             
         </Grid>

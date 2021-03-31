@@ -134,7 +134,7 @@
             </Button>
 
         </Grid>
-        <Grid Background="WhiteSmoke">
+        <Grid Background="White">
             <Frame x:Name="ActiveControl" NavigationUIVisibility="Hidden"/> <!--화면전환-->
         </Grid> 
     </DockPanel>
