@@ -187,6 +187,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\DataAccess.cs" />
+    <Compile Include="Model\StockStore.cs" />
+    <Compile Include="View\Store\AddStore.xaml.cs">
+      <DependentUpon>AddStore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\User\DeactiveUser.xaml.cs">
       <DependentUpon>DeactiveUser.xaml</DependentUpon>
     </Compile>
@@ -198,6 +202,9 @@
     </Compile>
     <Compile Include="View\Account\EditAccount.xaml.cs">
       <DependentUpon>EditAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Store\StoreList.xaml.cs">
+      <DependentUpon>StoreList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\User\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
@@ -221,6 +228,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Store\AddStore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\User\DeactiveUser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,6 +245,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Account\EditAccount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Store\StoreList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -333,6 +348,9 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="NanumGothic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
