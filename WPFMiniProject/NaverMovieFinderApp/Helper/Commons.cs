@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -49,6 +50,24 @@ namespace NaverMovieFinderApp
             }
 
             return result;
+        }
+
+        // HTML 태그 벗겨내는 작업 메서드
+        public static string StripHtmlTag(string text)
+        {
+            //윈도우 xaml.cs 에서 메서드 적용 시켜줘야함 [Commons.StripHtmlTag(item["title"].ToString())] 이렇게
+            return Regex.Replace(text, @"<(.|\n)*?>", ""); //<(.|\n)*?> html 태그를 의미하는 정규 표현식
+        }
+
+        // 본문 내용에 | 없애기, 빈칸이 존재하기 때문에 if문 활용
+        public static string StripPipe(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return "";
+
+            else
+           return text.Substring(0, text.LastIndexOf("|")).Replace("|", ", ");
+           // string result = text.Replace("|", ", ");
+           // return result.Substring(0, result.LastIndexOf(","));
         }
     }
 }
