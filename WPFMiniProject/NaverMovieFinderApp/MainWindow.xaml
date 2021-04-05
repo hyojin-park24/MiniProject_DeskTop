@@ -8,7 +8,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:NaverMovieFinderApp"
     mc:Ignorable="d"
-    Title="Naver Movie Finder" Height="550" Width="1024">
+    Title="Naver Movie Finder" Height="550" Width="1024" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
             <iconPacks:PackIconForkAwesome Kind="YoutubeSquare" Margin="5,7,0,0" Foreground="White" />
@@ -51,7 +51,7 @@
 
         <DataGrid x:Name="GrdData" Grid.Row="2" Grid.Column="1"
                   AutoGenerateColumns="False" Margin="10" SelectionUnit="FullRow"
-                  GridLinesVisibility="Vertical"
+                  GridLinesVisibility="Vertical" IsReadOnly="True"
                   Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
                   ItemsSource="{Binding}" SelectedCellsChanged="GrdData_SelectedCellsChanged">
             <DataGrid.Columns>
@@ -60,7 +60,7 @@
                 <DataGridTextColumn Binding="{Binding PubDate}" Header="상영년도" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Director}" Header="감독" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Actor}" Header="배우" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding UserRating}" Header="평점" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UserRating}" Header="네티즌 평점" IsReadOnly="True"/>
             </DataGrid.Columns>
 
         </DataGrid>
