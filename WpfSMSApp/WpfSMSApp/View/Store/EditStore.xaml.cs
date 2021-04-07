@@ -12,13 +12,23 @@ namespace WpfSMSApp.View.Store
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class AddStore : Page
+    public partial class EditStore : Page
     {
-        public AddStore()
+        private int StoreID { get; set; }
+       
+        //수정할 창고 객체 
+        private Model.Store CurrentStore { get; set; }
+
+        public EditStore()
         {
             InitializeComponent();
         }
 
+        //추가 생성자 만듦.StoreList에서 StoreId 받아옴 
+        public EditStore(int storeId) : this()
+        {
+            StoreID = storeId;
+        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -27,6 +37,21 @@ namespace WpfSMSApp.View.Store
                 Visibility.Hidden;
 
             TxtStoreID.Text = TxtStoreName.Text = TxtStoreLocation.Text = "";
+
+            try
+            {
+                //store 테이블에서 내용 읽어옴
+                CurrentStore = Logic.DataAccess.GetStores().Where(s => s.StoreID.Equals(StoreID)).FirstOrDefault();
+                TxtStoreID.Text = CurrentStore.StoreID.ToString();
+                TxtStoreName.Text = CurrentStore.StoreName;
+                TxtStoreLocation.Text = CurrentStore.StoreLocation;
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"EditStore.xaml.cs Page_Loded 예외발생 : {ex}");
+                Commons.ShowMessageAsync("예외", $"예외발생 : {ex}");
+               
+            }
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -34,7 +59,7 @@ namespace WpfSMSApp.View.Store
             NavigationService.GoBack();
         }
 
-        bool IsValid = true; // 지역변수 ==> 전역변수로 바꿔야함
+        private bool IsValid = true; // 지역변수 ==> 전역변수로 바꿔야함
 
         public bool IsValidInput()
         {
@@ -68,27 +93,24 @@ namespace WpfSMSApp.View.Store
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
-
-            LblStoreLocation.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
-
-            var store = new Model.Store();
+            LblStoreName.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
 
             isValid = IsValidInput(); // 유효성 체크 (빈값 못넣도록 만들어줌, 필수임)
 
             if (isValid)
             {
                 //MessageBox.Show("DB 입력처리!");
-                store.StoreName = TxtStoreName.Text;
-                store.StoreLocation = TxtStoreLocation.Text;
+                CurrentStore.StoreName = TxtStoreName.Text;
+                CurrentStore.StoreLocation = TxtStoreLocation.Text;
                 
                 try
                 {
-                    var result = Logic.DataAccess.SetStore(store);
+                    var result = Logic.DataAccess.SetStore(CurrentStore);
                     if (result == 0)
                     {
                         // 수정 안됨
-                        Commons.LOGGER.Error("AddStore.xaml.cs 창고 정보 저장 오류 발생");
-                        Commons.ShowMessageAsync("오류", "저장시 오류가 발생했습니다");
+                        Commons.LOGGER.Error("AddStore.xaml.cs 창고 정보 수정 오류 발생");
+                        Commons.ShowMessageAsync("오류", "수정시 오류가 발생했습니다");
                     }
                     else
                     {
